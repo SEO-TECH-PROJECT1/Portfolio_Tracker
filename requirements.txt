@@ -1,3 +1,6 @@
+# File: Portfolio_Tracker-main/requirements.txt
+# Description: List of dependencies required for the project.
+
 Flask==2.0.3
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==0.15.1
