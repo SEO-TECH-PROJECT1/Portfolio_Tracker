@@ -1,0 +1,32 @@
+<!-- File: Portfolio_Tracker/templates/dashboard.html -->
+<!-- Description: Template for displaying the user's stock portfolio dashboard. -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Stock Portfolio</h1>
+<div class="row">
+    <div class="col-md-8">
+        <canvas id="portfolioChart"></canvas>
+    </div>
+    <div class="col-md-4">
+        <h3>Portfolio Summary</h3>
+        <ul class="list-group">
+            {% for stock in stocks %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ stock.symbol }}
+                <span class="badge bg-primary rounded-pill">${{ stock.price }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('add_stock') }}" class="btn btn-primary mt-3">Add Stock</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // JavaScript code to create the portfolio chart using Chart.js
+    // This would use the stock data to create a visual representation of the portfolio
+</script>
+{% endblock %}
