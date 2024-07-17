@@ -1,6 +1,6 @@
-# File: Portfolio_Tracker/__init__.py
-# Description: Initialize the Flask application and configure extensions.
 
+
+from flask_migrate import Migrate
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -8,6 +8,7 @@ from config import Config
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+migrate = Migrate()
 
 def create_app():
     """Create and configure the Flask application."""
@@ -20,3 +21,6 @@ def create_app():
     from app import routes, models
     
     return app
+
+# File: Portfolio_Tracker/__init__.py
+# Description: Initialize the Flask application and configure extensions.

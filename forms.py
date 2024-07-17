@@ -39,3 +39,4 @@ class AddStockForm(FlaskForm):
     shares = IntegerField('Number of Shares', validators=[DataRequired()])
     purchase_price = FloatField('Purchase Price per Share', validators=[DataRequired()])
     submit = SubmitField('Add Stock')
+
