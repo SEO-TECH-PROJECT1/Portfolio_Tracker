@@ -138,25 +138,33 @@ Each of these templates is properly linked with the `base.html` for consistent s
 ## Running the Application
 
 1. Set up the virtual environment and install dependencies:
+```plaintext
    sh
    python3 -m venv venv
    source venv/bin/activate # On Windows, use `venv\Scripts\activate`
    pip install -r requirements.txt
+```
 
-2. Set up environment variables:
+3. Set up environment variables:
    Ensure you have a .env file in the root directory with the following content:
-   plaintext
+  
+```plaintext
    ALPHA_VANTAGE_API_KEY=your_alpha_vantage_api_key
    FMP_API_KEY=your_fmp_api_key
    SECRET_KEY=your_secret_key
+```
 
-3. Initialize the database:
+4. Initialize the database:
+```plaintext
    sh
    flask db init
    flask db migrate -m "Initial migration"
    flask db upgrade
+```
 
-4. Run the application:
+5. Run the application:
+```plaintext
    sh
    set FLASK_APP=run.py
    flask run
+```
