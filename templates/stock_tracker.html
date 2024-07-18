@@ -1,4 +1,4 @@
-
+<!-- File: Portfolio_Tracker/templates/stock_tracker.html -->
 
 {% extends "base.html" %}
 
@@ -7,12 +7,11 @@
     <h2>Stock Tracker</h2>
     <h3>Your Stocks:</h3>
     <ul>
-        {% for stock in stocks %}
-        <li>{{ stock.ticker }} - {{ stock.quantity }} shares @ ${{ stock.purchase_price }}</li>
+        {% for date, stock in stocks.items() %}
+        <li>
+            {{ date }} - Open: {{ stock['1. open'] }}, High: {{ stock['2. high'] }}, Low: {{ stock['3. low'] }}, Close: {{ stock['4. close'] }}, Volume: {{ stock['5. volume'] }}
+        </li>
         {% endfor %}
     </ul>
-    <h3>Stock Prices:</h3>
-    <img src="{{ url_for('static', filename=chart_path) }}" alt="Stock Chart">
 </div>
 {% endblock %}
-

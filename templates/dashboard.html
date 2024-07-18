@@ -8,14 +8,12 @@
     <h2>Dashboard</h2>
     <h3>Your Stocks:</h3>
     <ul>
-        {% for stock in stocks %}
+        {% for date, stock in stocks.items() %}
         <li>
-            {{ stock.ticker }} - {{ stock.quantity }} shares @ ${{ stock.purchase_price }}
-            <img src="{{ url_for('static', filename=stock.chart_path) }}" alt="Stock Chart">
+            {{ date }} - Open: {{ stock['1. open'] }}, High: {{ stock['2. high'] }}, Low: {{ stock['3. low'] }}, Close: {{ stock['4. close'] }}, Volume: {{ stock['5. volume'] }}
         </li>
         {% endfor %}
     </ul>
 </div>
 {% endblock %}
-
 

@@ -14,7 +14,8 @@ import requests
 import matplotlib.pyplot as plt
 import io
 import base64
-from datetime import datetime
+import random
+from datetime import datetime, timedelta
 from data import get_mock_stock_data, get_mock_recommendations, get_mock_profile
 
 # Configuration
@@ -23,6 +24,11 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'you-will-never-guess
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///stock_portfolio.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['ALPHA_VANTAGE_API_KEY'] = os.environ.get('ALPHA_VANTAGE_API_KEY') or 'your_api_key_here'
+
+# Print all config keys to the terminal
+print("Configuration Keys:")
+for key in app.config:
+    print(f"{key}: {app.config[key]}")
 
 # Extensions
 db = SQLAlchemy(app)
@@ -134,39 +140,36 @@ def register():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    preferred_stocks = get_mock_profile(current_user)['preferred_stocks']
-    stock_data = {ticker: get_stock_data(ticker) for ticker in preferred_stocks}
-    return render_template('dashboard.html', title='Dashboard', stock_data=stock_data)
+    # Placeholder for dashboard logic
+    stocks = get_mock_stock_data('AAPL')  # Using mock data for demonstration
+    return render_template('dashboard.html', title='Dashboard', stocks=stocks)
 
 @app.route('/profile')
 @login_required
 def profile():
     profile_info = get_mock_profile(current_user)
-    return render_template('profile.html', title='Profile', user=current_user, profile_info=profile_info)
+    return render_template('profile.html', title='Profile', profile_info=profile_info)
 
-@app.route('/stock_tracker', methods=['GET', 'POST'])
+@app.route('/stock_tracker')
 @login_required
 def stock_tracker():
-    form = StockForm()
-    stock_data = None
-    graph_url = None
-    ticker = None
+    stocks = get_mock_stock_data('AAPL')  # Using mock data for demonstration
+    return render_template('stock_tracker.html', title='Stock Tracker', stocks=stocks)
 
-    if form.validate_on_submit():
-        ticker = form.ticker.data
-        stock_data = get_stock_data(ticker)
-        if stock_data:
-            graph_url = create_stock_graph(ticker, stock_data)
-        else:
-            flash('Error retrieving stock data. Displaying mock data.', 'danger')
-
-    return render_template('stock_tracker.html', title='Stock Tracker', form=form, stock_data=stock_data, graph_url=graph_url, ticker=ticker)
+@app.route('/intraday/<ticker>', methods=['GET', 'POST'])
+@login_required
+def intraday(ticker):
+    interval = request.args.get('interval', '5min')
+    outputsize = request.args.get('outputsize', 'compact')
+    stock_data = get_stock_data(ticker, function='TIME_SERIES_INTRADAY', interval=interval, outputsize=outputsize)
+    graph_url = create_stock_graph(ticker, stock_data) if stock_data else None
+    return render_template('intraday.html', title=f'Intraday Data for {ticker}', ticker=ticker, stock_data=stock_data, graph_url=graph_url)
 
 @app.route('/recommendations')
 @login_required
 def recommendations():
     recommendations = get_mock_recommendations()
-    return render_template('recommendations.html', title='Recommendations', recommendations=recommendations)
+    return render_template('track_recommendations.html', title='Recommendations', recommendations=recommendations)
 
 # Error handling
 @app.errorhandler(404)
@@ -179,30 +182,60 @@ def internal_error(error):
     return render_template('500.html'), 500
 
 # Stock Data with error handling and mock data fallback
-def get_stock_data(ticker):
+def get_stock_data(ticker, function='TIME_SERIES_DAILY', interval='5min', outputsize='compact', adjusted=True, extended_hours=True, month=None):
     api_key = app.config['ALPHA_VANTAGE_API_KEY']
     base_url = 'https://www.alphavantage.co/query?'
-    function = 'TIME_SERIES_DAILY'
-    url = f'{base_url}function={function}&symbol={ticker}&apikey={api_key}'
-    
+    params = {
+        'function': function,
+        'symbol': ticker,
+        'apikey': api_key,
+    }
+
+    if function == 'TIME_SERIES_INTRADAY':
+        params['interval'] = interval
+        params['outputsize'] = outputsize
+        params['adjusted'] = 'true' if adjusted else 'false'
+        params['extended_hours'] = 'true' if extended_hours else 'false'
+        if month:
+            params['month'] = month
+
     try:
-        response = requests.get(url)
+        response = requests.get(base_url, params=params)
         response.raise_for_status()
         data = response.json()
-        
+
         if 'Error Message' in data:
             app.logger.error(f"Error retrieving data for {ticker}")
             return get_mock_stock_data(ticker)
-        
-        time_series = data.get('Time Series (Daily)')
+
+        if function == 'TIME_SERIES_INTRADAY':
+            time_series_key = f"Time Series ({interval})"
+        else:
+            time_series_key = 'Time Series (Daily)'
+
+        time_series = data.get(time_series_key)
         if not time_series:
             return get_mock_stock_data(ticker)
-        
+
         return time_series
 
     except requests.RequestException as e:
         app.logger.error(f"Request failed for {ticker}: {e}")
         return get_mock_stock_data(ticker)
+
+def get_mock_stock_data(ticker):
+    app.logger.info(f"Returning mock data for {ticker}")
+    mock_data = {}
+    for i in range(30):
+        date = (datetime.now() - timedelta(days=i)).strftime('%Y-%m-%d %H:%M:%S')
+        mock_data[date] = {
+            '1. open': f"{random.uniform(100, 500):.2f}",
+            '2. high': f"{random.uniform(100, 500):.2f}",
+            '3. low': f"{random.uniform(100, 500):.2f}",
+            '4. close': f"{random.uniform(100, 500):.2f}",
+            '5. volume': f"{random.randint(100000, 5000000)}"
+        }
+    return mock_data
 
 # Dynamic graph creation
 def create_stock_graph(ticker, time_series):

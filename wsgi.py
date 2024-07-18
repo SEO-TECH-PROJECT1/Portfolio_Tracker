@@ -1,6 +1,8 @@
 # Portfolio_Tracker/wsgi.py
 
 
-from Portfolio_Tracker.app import create_app
+# wsgi.py
+from app import app
 
-app = create_app()
+if __name__ == "__main__":
+    app.run()
