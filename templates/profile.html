@@ -1,0 +1,7 @@
+<!-- File: Portfolio_Tracker/templates/profile.html -->
+{% extends "base.html" %}
+{% block content %}
+  <h2>User Profile</h2>
+  <p>Username: {{ current_user.username }}</p>
+  <p>Email: {{ current_user.email }}</p>
+{% endblock %}

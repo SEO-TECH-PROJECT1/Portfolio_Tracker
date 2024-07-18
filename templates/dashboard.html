@@ -2,31 +2,20 @@
 <!-- Description: Template for displaying the user's stock portfolio dashboard. -->
 
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Your Stock Portfolio</h1>
-<div class="row">
-    <div class="col-md-8">
-        <canvas id="portfolioChart"></canvas>
-    </div>
-    <div class="col-md-4">
-        <h3>Portfolio Summary</h3>
-        <ul class="list-group">
-            {% for stock in stocks %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ stock.symbol }}
-                <span class="badge bg-primary rounded-pill">${{ stock.price }}</span>
-            </li>
-            {% endfor %}
-        </ul>
-        <a href="{{ url_for('add_stock') }}" class="btn btn-primary mt-3">Add Stock</a>
-    </div>
-</div>
+<h2>Dashboard</h2>
+<ul>
+    {% for ticker, data in stocks.items() %}
+    <li>
+        <h3>{{ ticker }}</h3>
+        <p>Latest Close: {{ data[-1]['close'] }}</p>
+        <p>Volume: {{ data[-1]['volume'] }}</p>
+        <p>Open: {{ data[-1]['open'] }}</p>
+        <p>High: {{ data[-1]['high'] }}</p>
+        <p>Low: {{ data[-1]['low'] }}</p>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
 
-{% block scripts %}
-<script>
-    // JavaScript code to create the portfolio chart using Chart.js
-    // This would use the stock data to create a visual representation of the portfolio
-</script>
-{% endblock %}
+
