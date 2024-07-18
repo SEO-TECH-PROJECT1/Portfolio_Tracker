@@ -1,0 +1,23 @@
+<!-- File: Portfolio_Tracker/templates/profile.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ current_user.username }}'s Profile</h2>
+    <p><strong>Email:</strong> {{ current_user.email }}</p>
+    <h3>Owned Stocks:</h3>
+    <ul>
+        {% for stock in stocks %}
+        <li>{{ stock.ticker }} - {{ stock.quantity }} shares @ ${{ stock.purchase_price }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Recent Activity:</h3>
+    <ul>
+        <li>Activity 1</li>
+        <li>Activity 2</li>
+        <li>Activity 3</li>
+    </ul>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,21 @@
+<!-- File: Portfolio_Tracker/templates/dashboard.html -->
+<!-- Description: Template for displaying the user's stock portfolio dashboard. -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Dashboard</h2>
+    <h3>Your Stocks:</h3>
+    <ul>
+        {% for stock in stocks %}
+        <li>
+            {{ stock.ticker }} - {{ stock.quantity }} shares @ ${{ stock.purchase_price }}
+            <img src="{{ url_for('static', filename=stock.chart_path) }}" alt="Stock Chart">
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+

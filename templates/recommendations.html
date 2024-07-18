@@ -1,0 +1,21 @@
+<!-- File: Portfolio_Tracker/templates/track_recommendations.html -->
+
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Stock Recommendations</h2>
+    <ul>
+        {% for recommendation in recommendations %}
+        <li>
+            <strong>Ticker:</strong> {{ recommendation.ticker }}<br>
+            <strong>Current Price:</strong> {{ recommendation.current_price }}<br>
+            <strong>Recommendation:</strong> {{ recommendation.recommendation }}<br>
+            <strong>Reason:</strong> {{ recommendation.reason }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
