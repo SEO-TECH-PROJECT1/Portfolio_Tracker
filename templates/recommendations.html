@@ -4,18 +4,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-4">
     <h2>Stock Recommendations</h2>
-    <ul>
-        {% for recommendation in recommendations %}
-        <li>
-            <strong>Ticker:</strong> {{ recommendation.ticker }}<br>
-            <strong>Current Price:</strong> {{ recommendation.current_price }}<br>
-            <strong>Recommendation:</strong> {{ recommendation.recommendation }}<br>
-            <strong>Reason:</strong> {{ recommendation.reason }}
-        </li>
-        {% endfor %}
-    </ul>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <th>Recommendation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recommendation in recommendations %}
+            <tr>
+                <td>{{ recommendation.ticker }}</td>
+                <td>{{ recommendation.recommendation }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
-
