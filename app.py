@@ -137,19 +137,55 @@ def register():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    # Placeholder for dashboard logic
-    return render_template('dashboard.html', title='Dashboard')
+    # Mock data for demonstration
+    stocks = {
+        '2024-07-18': {'symbol': 'AAPL', 'price': '150.00'},
+        '2024-07-19': {'symbol': 'GOOGL', 'price': '2800.00'},
+        '2024-07-20': {'symbol': 'AMZN', 'price': '3400.00'}
+    }
+    return render_template('dashboard.html', title='Dashboard', stocks=stocks)
 
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', title='Profile', user=current_user)
+    profile_info = {
+        'username': current_user.username,
+        'email': current_user.email,
+        'joined': '2023-01-01',
+        'preferred_stocks': ['AAPL', 'GOOGL', 'TSLA']
+    }
+    return render_template('profile.html', title='Profile', profile_info=profile_info)
+
+@app.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_profile_picture(form.picture.data)
+            current_user.profile_picture = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    profile_image = url_for('static', filename='profile_pics/' + current_user.profile_picture)
+    return render_template('account.html', title='Account', profile_image=profile_image, form=form)
 
 @app.route('/stock_tracker')
 @login_required
 def stock_tracker():
-    # Placeholder for stock tracker logic
-    return render_template('stock_tracker.html', title='Stock Tracker')
+    # Mock data for demonstration
+    stocks = {
+        '2024-07-18': {'symbol': 'AAPL', 'price': '150.00'},
+        '2024-07-19': {'symbol': 'GOOGL', 'price': '2800.00'},
+        '2024-07-20': {'symbol': 'AMZN', 'price': '3400.00'}
+    }
+    return render_template('stock_tracker.html', title='Stock Tracker', stocks=stocks)
+
 
 @app.route('/recommendations')
 @login_required

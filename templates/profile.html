@@ -1,26 +1,18 @@
 <!-- File: Portfolio_Tracker/templates/profile.html -->
+
+
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Profile</h2>
-    <table class="table table-bordered mt-4">
-        <tr>
-            <th>Username</th>
-            <td>{{ profile_info.username }}</td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ profile_info.email }}</td>
-        </tr>
-        <tr>
-            <th>Joined</th>
-            <td>{{ profile_info.joined }}</td>
-        </tr>
-        <tr>
-            <th>Preferred Stocks</th>
-            <td>{{ profile_info.preferred_stocks | join(', ') }}</td>
-        </tr>
-    </table>
-</div>
+<h2>{{ title }}</h2>
+<table class="table">
+    <tr>
+        <th>Username</th>
+        <td>{{ profile_info.username }}</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>{{ profile_info.email }}</td>
+    </tr>
+</table>
 {% endblock %}

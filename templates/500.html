@@ -1,8 +1,11 @@
 <!-- File: Portfolio_Tracker/templates/500.html -->
+<!-- Description: Template for displaying a 500 Internal Server Error. -->
+
+
 {% extends "base.html" %}
 
 {% block content %}
-<h2>500 Error</h2>
-<p>An internal server error occurred. Please try again later.</p>
+<h2>500 - Internal Server Error</h2>
+<p>Something went wrong on our end. Please try again later.</p>
 <a href="{{ url_for('index') }}">Return to Home</a>
 {% endblock %}

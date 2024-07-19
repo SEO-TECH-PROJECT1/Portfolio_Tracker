@@ -1,19 +1,28 @@
 <!-- File: Portfolio_Tracker/templates/dashboard.html -->
 <!-- Description: Template for displaying the user's stock portfolio dashboard. -->
 
+
+
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <h2>Dashboard</h2>
-    <h3>Your Stocks:</h3>
-    <ul>
+<h2>{{ title }}</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Stock</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for date, stock in stocks.items() %}
-        <li>
-            {{ date }} - Open: {{ stock['1. open'] }}, High: {{ stock['2. high'] }}, Low: {{ stock['3. low'] }}, Close: {{ stock['4. close'] }}, Volume: {{ stock['5. volume'] }}
-        </li>
+        <tr>
+            <td>{{ date }}</td>
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.price }}</td>
+        </tr>
         {% endfor %}
-    </ul>
-</div>
+    </tbody>
+</table>
 {% endblock %}
-

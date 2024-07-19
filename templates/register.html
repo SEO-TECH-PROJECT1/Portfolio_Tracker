@@ -1,35 +1,29 @@
 <!-- File: Portfolio_Tracker/templates/register.html -->
 <!-- Description: Template for the registration page. -->
 
+<!-- File: Portfolio_Tracker/templates/register.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2>Register</h2>
-        <form method="POST" action="{{ url_for('register') }}">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.username.label(class="form-label") }}
-                {{ form.username(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.email.label(class="form-label") }}
-                {{ form.email(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.password.label(class="form-label") }}
-                {{ form.password(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.password2.label(class="form-label") }}
-                {{ form.password2(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-primary") }}
-            </div>
-        </form>
+<h2>{{ title }}</h2>
+<form method="POST" action="{{ url_for('register') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.username.label(class="form-control-label") }}
+        {{ form.username(class="form-control", placeholder="Username") }}
     </div>
-</div>
+    <div class="form-group">
+        {{ form.email.label(class="form-control-label") }}
+        {{ form.email(class="form-control", placeholder="Email") }}
+    </div>
+    <div class="form-group">
+        {{ form.password.label(class="form-control-label") }}
+        {{ form.password(class="form-control", placeholder="Password") }}
+    </div>
+    <div class="form-group">
+        {{ form.password2.label(class="form-control-label") }}
+        {{ form.password2(class="form-control", placeholder="Repeat Password") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
 {% endblock %}
-

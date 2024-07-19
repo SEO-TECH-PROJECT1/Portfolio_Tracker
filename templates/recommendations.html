@@ -1,26 +1,23 @@
 <!-- File: Portfolio_Tracker/templates/track_recommendations.html -->
 
-
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Stock Recommendations</h2>
-    <table class="table table-bordered mt-4">
-        <thead>
-            <tr>
-                <th>Ticker</th>
-                <th>Recommendation</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for recommendation in recommendations %}
-            <tr>
-                <td>{{ recommendation.ticker }}</td>
-                <td>{{ recommendation.recommendation }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+<h2>{{ title }}</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ticker</th>
+            <th>Recommendation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rec in recommendations %}
+        <tr>
+            <td>{{ rec.ticker }}</td>
+            <td>{{ rec.recommendation }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

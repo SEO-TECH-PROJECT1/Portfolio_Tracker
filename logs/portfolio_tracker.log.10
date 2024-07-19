@@ -1,126 +1,83 @@
-2024-07-18 15:52:26,269 ERROR: Exception on /dashboard [GET] [in C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py:1457]
+2024-07-18 22:17:54,894 ERROR: Exception on /recommendations [GET] [in C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py:1457]
 Traceback (most recent call last):
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
     response = self.full_dispatch_request()
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
     rv = self.handle_user_exception(e)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
     rv = self.dispatch_request()
          ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1502, in dispatch_request
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1502, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask_login\utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py", line 131, in dashboard
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\templating.py", line 147, in render_template
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py", line 158, in recommendations
+    return render_template('recommendations.html', title='Recommendations', recommendations=recommendations)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 148, in render_template
+    ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 59, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 95, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: recommendations.html
+2024-07-18 22:18:10,893 ERROR: Exception on /dashboard [GET] [in C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py:1457]
+Traceback (most recent call last):
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py", line 141, in dashboard
+    return render_template('dashboard.html', title='Dashboard')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 147, in render_template
     return _render(
            ^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\templating.py", line 128, in _render
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 128, in _render
     rv = template.render(context)
          ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jinja2\environment.py", line 1301, in render
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
     self.environment.handle_exception()
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
     raise rewrite_traceback_stack(source=source)
   File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\dashboard.html", line 4, in top-level template code
     {% extends "base.html" %}
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\base.html", line 20, in top-level template code
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('recommendations') }}">Recommendations</a></li>
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\base.html", line 32, in top-level template code
+    {% block content %}{% endblock %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-         ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing.py", line 2315, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'recommendations'. Did you mean 'register' instead?
-2024-07-18 16:04:01,967 INFO: Portfolio Tracker startup [in C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py:41]
-2024-07-18 16:04:10,247 INFO: Portfolio Tracker startup [in C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py:41]
-2024-07-18 16:04:15,154 ERROR: Exception on / [GET] [in C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py:1457]
-Traceback (most recent call last):
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1502, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py", line 97, in index
-    return render_template('index.html', title='Home')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\templating.py", line 147, in render_template
-    return _render(
-           ^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\templating.py", line 128, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jinja2\environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jinja2\environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\index.html", line 4, in top-level template code
-    {% extends "base.html" %}
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\base.html", line 20, in top-level template code
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('recommendations') }}">Recommendations</a></li>
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\dashboard.html", line 11, in block 'content'
+    {% for date, stock in stocks.items() %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-         ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing.py", line 2315, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'recommendations'. Did you mean 'register' instead?
-2024-07-18 16:07:10,647 ERROR: Exception on / [GET] [in C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py:1457]
-Traceback (most recent call last):
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\app.py", line 1502, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py", line 97, in index
-    return render_template('index.html', title='Home')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\templating.py", line 147, in render_template
-    return _render(
-           ^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\templating.py", line 128, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jinja2\environment.py", line 1301, in render
-    self.environment.handle_exception()
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\jinja2\environment.py", line 936, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\index.html", line 4, in top-level template code
-    {% extends "base.html" %}
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\base.html", line 20, in top-level template code
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('recommendations') }}">Recommendations</a></li>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\flask\helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-         ^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\AppData\Local\Programs\Python\Python312\Lib\site-packages\werkzeug\routing.py", line 2315, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'recommendations'. Did you mean 'register' instead?
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 487, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'stocks' is undefined
