@@ -1,7 +1,5 @@
 # app.py
 
-# app.py
-
 import os
 import logging
 from logging.handlers import RotatingFileHandler
@@ -16,7 +14,6 @@ import io
 import base64
 import random
 from datetime import datetime, timedelta
-from data import get_mock_stock_data, get_mock_recommendations, get_mock_profile
 
 # Configuration
 app = Flask(__name__)
@@ -107,7 +104,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -115,7 +112,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     return render_template('login.html', title='Sign In', form=form)
 
 @app.route('/logout')
@@ -126,7 +123,7 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
@@ -141,35 +138,33 @@ def register():
 @login_required
 def dashboard():
     # Placeholder for dashboard logic
-    stocks = get_mock_stock_data('AAPL')  # Using mock data for demonstration
-    return render_template('dashboard.html', title='Dashboard', stocks=stocks)
+    return render_template('dashboard.html', title='Dashboard')
 
 @app.route('/profile')
 @login_required
 def profile():
-    profile_info = get_mock_profile(current_user)
-    return render_template('profile.html', title='Profile', profile_info=profile_info)
+    return render_template('profile.html', title='Profile', user=current_user)
 
 @app.route('/stock_tracker')
 @login_required
 def stock_tracker():
-    stocks = get_mock_stock_data('AAPL')  # Using mock data for demonstration
-    return render_template('stock_tracker.html', title='Stock Tracker', stocks=stocks)
+    # Placeholder for stock tracker logic
+    return render_template('stock_tracker.html', title='Stock Tracker')
+
+@app.route('/recommendations')
+@login_required
+def recommendations():
+    recommendations = get_mock_recommendations()  # Replace with actual recommendation logic
+    return render_template('recommendations.html', title='Recommendations', recommendations=recommendations)
 
 @app.route('/intraday/<ticker>', methods=['GET', 'POST'])
 @login_required
 def intraday(ticker):
     interval = request.args.get('interval', '5min')
     outputsize = request.args.get('outputsize', 'compact')
-    stock_data = get_stock_data(ticker, function='TIME_SERIES_INTRADAY', interval=interval, outputsize=outputsize)
+    stock_data, is_api_data = get_stock_data(ticker, function='TIME_SERIES_INTRADAY', interval=interval, outputsize=outputsize)
     graph_url = create_stock_graph(ticker, stock_data) if stock_data else None
-    return render_template('intraday.html', title=f'Intraday Data for {ticker}', ticker=ticker, stock_data=stock_data, graph_url=graph_url)
-
-@app.route('/recommendations')
-@login_required
-def recommendations():
-    recommendations = get_mock_recommendations()
-    return render_template('track_recommendations.html', title='Recommendations', recommendations=recommendations)
+    return render_template('intraday.html', title=f'Intraday Data for {ticker}', ticker=ticker, stock_data=stock_data, graph_url=graph_url, is_api_data=is_api_data)
 
 # Error handling
 @app.errorhandler(404)
@@ -206,7 +201,7 @@ def get_stock_data(ticker, function='TIME_SERIES_DAILY', interval='5min', output
 
         if 'Error Message' in data:
             app.logger.error(f"Error retrieving data for {ticker}")
-            return get_mock_stock_data(ticker)
+            return get_mock_stock_data(ticker), False
 
         if function == 'TIME_SERIES_INTRADAY':
             time_series_key = f"Time Series ({interval})"
@@ -215,13 +210,13 @@ def get_stock_data(ticker, function='TIME_SERIES_DAILY', interval='5min', output
 
         time_series = data.get(time_series_key)
         if not time_series:
-            return get_mock_stock_data(ticker)
+            return get_mock_stock_data(ticker), False
 
-        return time_series
+        return time_series, True
 
     except requests.RequestException as e:
         app.logger.error(f"Request failed for {ticker}: {e}")
-        return get_mock_stock_data(ticker)
+        return get_mock_stock_data(ticker), False
 
 def get_mock_stock_data(ticker):
     app.logger.info(f"Returning mock data for {ticker}")
@@ -236,6 +231,13 @@ def get_mock_stock_data(ticker):
             '5. volume': f"{random.randint(100000, 5000000)}"
         }
     return mock_data
+
+def get_mock_recommendations():
+    return [
+        {'ticker': 'AAPL', 'recommendation': 'Buy'},
+        {'ticker': 'TSLA', 'recommendation': 'Hold'},
+        {'ticker': 'GOOGL', 'recommendation': 'Sell'},
+    ]
 
 # Dynamic graph creation
 def create_stock_graph(ticker, time_series):

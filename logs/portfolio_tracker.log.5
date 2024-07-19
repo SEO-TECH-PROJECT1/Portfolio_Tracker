@@ -1,13 +1,4 @@
-2024-07-18 15:26:20,812 ERROR: Exception on /dashboard [GET] [in C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py:1457]
-Traceback (most recent call last):
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1808, in _execute_context
-    self.dialect.do_execute(
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 732, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: stock
-
-The above exception was the direct cause of the following exception:
-
+2024-07-18 22:17:42,373 ERROR: Exception on /dashboard [GET] [in C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py:1457]
 Traceback (most recent call last):
   File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
     response = self.full_dispatch_request()
@@ -24,40 +15,70 @@ Traceback (most recent call last):
   File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask_login\utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py", line 140, in dashboard
-    stocks = Stock.query.filter_by(user_id=current_user.id).all()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2759, in all
-    return self._iter().all()
-           ^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2894, in _iter
-    result = self.session.execute(
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1692, in execute
-    result = conn._execute_20(statement, params or {}, execution_options)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1620, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 325, in _execute_on_connection
-    return connection._execute_clauseelement(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1487, in _execute_clauseelement
-    ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1851, in _execute_context
-    self._handle_dbapi_exception(
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2032, in _handle_dbapi_exception
-    util.raise_(
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\util\compat.py", line 207, in raise_
-    raise exception
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1808, in _execute_context
-    self.dialect.do_execute(
-  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 732, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: stock
-[SQL: SELECT stock.id AS stock_id, stock.user_id AS stock_user_id, stock.ticker AS stock_ticker, stock.quantity AS stock_quantity, stock.purchase_price AS stock_purchase_price, stock.purchase_date AS stock_purchase_date 
-FROM stock 
-WHERE stock.user_id = ?]
-[parameters: (1,)]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py", line 141, in dashboard
+    return render_template('dashboard.html', title='Dashboard')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 147, in render_template
+    return _render(
+           ^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\dashboard.html", line 4, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\base.html", line 32, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\dashboard.html", line 11, in block 'content'
+    {% for date, stock in stocks.items() %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 487, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'stocks' is undefined
+2024-07-18 22:17:47,843 ERROR: Exception on /dashboard [GET] [in C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py:1457]
+Traceback (most recent call last):
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\app.py", line 141, in dashboard
+    return render_template('dashboard.html', title='Dashboard')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 147, in render_template
+    return _render(
+           ^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\dashboard.html", line 4, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\base.html", line 32, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\templates\dashboard.html", line 11, in block 'content'
+    {% for date, stock in stocks.items() %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Telsa\OneDrive\04 - SUMMER 24\SEO TECH COURSE\Project_3\Portfolio_Tracker\venv\Lib\site-packages\jinja2\environment.py", line 487, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'stocks' is undefined

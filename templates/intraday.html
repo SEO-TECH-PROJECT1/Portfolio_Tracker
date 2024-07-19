@@ -7,6 +7,11 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <h2>Intraday Data for {{ ticker }}</h2>
+        {% if is_api_data %}
+            <p>Data source: API Response</p>
+        {% else %}
+            <p>Data source: Mock Data</p>
+        {% endif %}
         {% if stock_data %}
             <img src="{{ graph_url }}" alt="Stock Graph">
             <table class="table">
