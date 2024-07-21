@@ -138,7 +138,7 @@ def webhook():
     if request.method == 'POST':
         repo = git.Repo('/home/PortfolioTracker/Portfolio_Tracker')
         origin = repo.remotes.origin
-        origin.pull()
+        origin.pull('branch_3_GR')
         return 'Updated PythonAnywhere successfully', 200
     else:
         return 'Wrong event type', 400
