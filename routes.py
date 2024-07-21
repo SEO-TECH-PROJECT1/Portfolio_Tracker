@@ -3,9 +3,9 @@
 
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
-from Portfolio_Tracker import db
-from Portfolio_Tracker.models import User, Stock
-from Portfolio_Tracker.forms import LoginForm, RegistrationForm
+from app import db
+from models import User, Stock
+from forms import LoginForm, RegistrationForm
 
 bp = Blueprint('main', __name__)
 

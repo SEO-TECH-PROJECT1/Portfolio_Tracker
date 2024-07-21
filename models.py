@@ -1,7 +1,7 @@
 # File: Portfolio_Tracker/models.py
 # Description: Define the database models for the application.
 
-from Portfolio_Tracker import db
+from app import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
