@@ -1,5 +1,6 @@
 # app.py
 
+import git
 import os
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
@@ -129,6 +130,18 @@ def add_stock():
         else:
             flash(f'Failed to retrieve data for {ticker}.')
     return render_template('add_stock.html', title='Add Stock')
+
+
+#deployment function
+@app.route("/update_server", methods=['POST'])
+def webhook():
+    if request.method == 'POST':
+        repo = git.Repo('/home/PortfolioTracker/Portfolio_Tracker')
+        origin = repo.remotes.origin
+        origin.pull()
+        return 'Updated PythonAnywhere successfully', 200
+    else:
+        return 'Wrong event type', 400
 
 # WSGI entry point
 if __name__ == '__main__':
