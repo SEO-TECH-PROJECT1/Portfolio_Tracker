@@ -295,5 +295,16 @@ def create_stock_graph(ticker, time_series):
     plt.close()
     return f'data:image/png;base64,{graph_url}'
 
+#deployment function
+@app.route("/update_server", methods=['POST'])
+def webhook():
+    if request.method == 'POST':
+        repo = git.Repo('/home/PortfolioTracker/Portfolio_Tracker')
+        origin = repo.remotes.origin
+        origin.pull('branch_4_BR_02')
+        return 'Updated PythonAnywhere successfully', 200
+    else:
+        return 'Wrong event type', 400
+        
 if __name__ == '__main__':
     app.run(debug=True)
