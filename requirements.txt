@@ -12,4 +12,8 @@ WTForms==3.0.1
 python-dotenv==0.19.2
 SQLAlchemy==1.4.32
 flask_migrate==4.0.4
-
+coverage==7.3.1
+pytest==7.4.0
+pytest-flask==1.2.0
+factory_boy==3.0.0
+Flask-Testing==0.8.1
