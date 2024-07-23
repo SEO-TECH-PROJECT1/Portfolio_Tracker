@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-client = OpenAI()
+client = OpenAI(api_key="")
 
 def chat_call(context):
     
@@ -59,38 +59,28 @@ tools = [
 ]
 
 
-ticker = "AAPL"
 
-news = sd.get_stock_news("AAPL")
+def get_reccomendation(ticker):
+    news = sd.get_stock_news("SAVA")
+    time_series  = sd.get_weekly_stock_data("SAVA")
+    data = sd.get_last_week(time_series)
+    descriptions = [item['description'] for item in news['data']]
+
+    prompt = f"""Give a recommendation based on the following data:
+                - Market data: {data}  
+                - Current events: {descriptions}"""
+
+    context = [{"role": "user", "content": prompt}]
+
+    response = chat_call(context)
+
+    res_data = response.choices[0].message
+    res_tools = res_data.tool_calls
+    res_args = eval(res_tools[0].function.arguments)
+
+    return res_args["reccomendation"], res_args["confidence"], res_args["rationale"]
 
 
-descriptions = [item['description'] for item in news['data']]
-
-
-data  = sd.get_weekly_stock_data("AAPL")
 
 
 
-prompt = f"""Give a recommendation based on the following data:
-            - Market data: {data}  
-            - Current events: {descriptions}"""
-
-# pprint(prompt)
-
-context = [{"role": "user", "content": prompt}]
-
-response = chat_call(context)
-
-res_data = response.choices[0].message
-res_tools = res_data.tool_calls
-
-tool_id = res_tools[0].id
-tool_function_name = res_tools[0].function.name
-res_args = eval(res_tools[0].function.arguments)
-
-print(tool_id)
-print(tool_function_name)
-pprint(res_args)
-# print(res_args["reccomendation"])
-# print(res_args["confidence"])
-# print(res_args["rationale"])

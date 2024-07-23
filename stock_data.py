@@ -4,35 +4,26 @@
 
 import requests
 from pprint import pprint
+import mock
+from datetime import datetime, timedelta
 
-MA_API_KEY = ""
-AV_API_KEY = ""
+# MA_API_KEY = ""
+# AV_API_KEY = ""
 
 
-# def get_stock_quote(symbol):
-#     """Fetch the current stock quote for a given symbol."""
-#     url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={Config.ALPHA_VANTAGE_API_KEY}'
-#     response = requests.get(url)
-#     data = response.json()
-#     return {
-#         'symbol': symbol,
-#         'price': float(data['Global Quote']['05. price']),
-#         'change': float(data['Global Quote']['09. change']),
-#         'change_percent': data['Global Quote']['10. change percent']
-#     }
 
-# def get_stock_data(symbol):
-#     """Fetch the historical stock data for a given symbol."""
-#     url = f'https://financialmodelingprep.com/api/v3/historical-price-full/{symbol}?apikey={Config.FMP_API_KEY}'
-#     response = requests.get(url)
-#     data = response.json()
-#     return data['historical'][:30]  # Return last 30 days of data
+
 
 def get_weekly_stock_data(symbol):
     """Fetch the weekly stock data for a given symbol."""
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol={symbol}&apikey={AV_API_KEY}'
+    end_date = datetime.now().strftime("%Y-%m-%d")
+    start_date = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
+    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol={symbol}&apikey={AV_API_KEY}&outputsize=compact&datatype=json&interval=weekly&from={start_date}&to={end_date}'
     response = requests.get(url)
     data = response.json()
+    if data != None:
+        return data
+    return mock.data
 
 def get_stock_news(symbol):
     """Fetch the latest news articles for a given stock symbol."""
@@ -42,8 +33,15 @@ def get_stock_news(symbol):
     return data
 
 
-# pprint(get_stock_news("AAPL"))  
-#pprint(get_weekly_stock_data("AAPL"))
+def get_last_week(data):
+    time_series = data["Weekly Adjusted Time Series"]
+    last_7_entries = list(time_series.keys())[:8]
+    return {date: time_series[date] for date in last_7_entries}
+
+
+
+
+
 
 
 
