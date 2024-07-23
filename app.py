@@ -1,5 +1,6 @@
 # app.py
 
+import git
 import os
 import logging
 from logging.handlers import RotatingFileHandler
@@ -14,6 +15,8 @@ import io
 import base64
 import random
 from datetime import datetime, timedelta
+import requests
+
 
 # Configuration
 app = Flask(__name__)
