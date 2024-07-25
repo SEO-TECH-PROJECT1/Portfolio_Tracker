@@ -5,7 +5,8 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from Portfolio_Tracker import db
 from Portfolio_Tracker.models import User
-from Portfolio_Tracker.forms import LoginForm, RegistrationForm
+from Portfolio_Tracker.forms import LoginForm, RegistrationForm, StockForm
+
 
 bp = Blueprint('main', __name__)
 
@@ -42,3 +43,28 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('main.login'))
     return render_template('register.html', form=form)
+
+
+@bp.route('/view_stocks')
+@login_required
+def view_stocks():
+    stocks = Stock.query.filter_by(user_id=current_user.id).all()
+    return render_template('view_stocks.html', stocks=stocks)
+
+@bp.route('/add_stock', methods=['GET', 'POST'])
+@login_required
+def add_stock():
+    form = StockForm()
+    if form.validate_on_submit():
+        stock = Stock(
+            ticker=form.ticker.data,
+            quantity=form.quantity.data,
+            purchase_price=form.purchase_price.data,
+            user_id=current_user.id
+        )
+        db.session.add(stock)
+        db.session.commit()
+        flash('Stock added successfully!')
+        return redirect(url_for('main.view_stocks'))
+    return render_template('add_stock.html', form=form)
+

@@ -1,30 +1,39 @@
 <!-- File: Portfolio_Tracker/templates/add_stock.html -->
 <!-- Description: Template for the add stock page. -->
 
-{% extends "base.html" %}
-
-{% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2>Add Stock</h2>
-        <form method="POST" action="{{ url_for('add_stock') }}">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.symbol.label(class="form-label") }}
-                {{ form.symbol(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.shares.label(class="form-label") }}
-                {{ form.shares(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.purchase_price.label(class="form-label") }}
-                {{ form.purchase_price(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-primary") }}
-            </div>
-        </form>
-    </div>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Stock</title>
+</head>
+<body>
+    <h1>Add Stock</h1>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.ticker.label }}<br>
+            {{ form.ticker(size=32) }}<br>
+            {% for error in form.ticker.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.quantity.label }}<br>
+            {{ form.quantity(size=32) }}<br>
+            {% for error in form.quantity.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.purchase_price.label }}<br>
+            {{ form.purchase_price(size=32) }}<br>
+            {% for error in form.purchase_price.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <a href="{{ url_for('main.index') }}">Back to Home</a>
+</body>
+</html>
