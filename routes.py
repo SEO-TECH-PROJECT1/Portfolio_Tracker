@@ -4,7 +4,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from Portfolio_Tracker import db
-from Portfolio_Tracker.models import User, Stock
+from Portfolio_Tracker.models import User
 from Portfolio_Tracker.forms import LoginForm, RegistrationForm
 
 bp = Blueprint('main', __name__)
@@ -26,6 +26,7 @@ def login():
     return render_template('login.html', form=form)
 
 @bp.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
