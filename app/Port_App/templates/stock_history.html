@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock History - {{ symbol }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Stock History for {{ symbol }}</h1>
+    <canvas id="stockChart"></canvas>
+    <script>
+        var ctx = document.getElementById('stockChart').getContext('2d');
+        var stockChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ dates|tojson }},
+                datasets: [{
+                    label: 'Closing Price',
+                    data: {{ prices|tojson }},
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            }
+        });
+    </script>
+    <a href="{{ url_for('routes.portfolio') }}">Back to Portfolio</a>
+</body>
+</html>

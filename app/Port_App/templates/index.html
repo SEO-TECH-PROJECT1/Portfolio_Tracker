@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Stock Portfolio App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Stock Portfolio App</h1>
+    </header>
+    <div class="container">
+        <form method="POST">
+            <h2>Login</h2>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" name="login">Login</button>
+            <p class="flash-message">{{ get_flashed_messages()[0] }}</p>
+        </form>
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+    </div>
+</body>
+</html>

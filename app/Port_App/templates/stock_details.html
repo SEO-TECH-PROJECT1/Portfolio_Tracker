@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Details - {{ symbol }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Stock Details for {{ symbol }}</h1>
+    </header>
+    <div class="container">
+        <p>Date: {{ info.get('1. open', 'N/A') }}</p>
+        <p>Open: {{ info.get('1. open', 'N/A') }}</p>
+        <p>High: {{ info.get('2. high', 'N/A') }}</p>
+        <p>Low: {{ info.get('3. low', 'N/A') }}</p>
+        <p>Close: {{ info.get('4. close', 'N/A') }}</p>
+        <p>Volume: {{ info.get('5. volume', 'N/A') }}</p>
+        <a href="{{ url_for('portfolio') }}">Back to Portfolio</a>
+    </div>
+</body>
+</html>

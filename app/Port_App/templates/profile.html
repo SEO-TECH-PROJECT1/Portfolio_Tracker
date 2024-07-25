@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile - Stock Portfolio App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Your Profile</h1>
+    </header>
+    <div class="container">
+        <form method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" value="{{ user.username }}" required>
+            <label for="password">New Password:</label>
+            <input type="password" name="password">
+            <button type="submit">Update Profile</button>
+        </form>
+        <a href="{{ url_for('portfolio') }}">Back to Portfolio</a>
+    </div>
+</body>
+</html>

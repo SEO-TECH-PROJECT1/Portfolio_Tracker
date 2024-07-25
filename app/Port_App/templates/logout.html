@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logout - Stock Portfolio App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Stock Portfolio</h1>
+    </header>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('portfolio') }}">Portfolio</a>
+        <a href="{{ url_for('update_account') }}">Update Account</a>
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+    </nav>
+    <div class="container">
+        <h2>You have been logged out.</h2>
+        <a href="{{ url_for('index') }}">Go to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio - Stock Portfolio App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #3D52A0;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+
+        /* Chat Styles */
+        #chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: #fff;
+            border: 2px solid #ADBBDA;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: width 0.3s, height 0.3s, opacity 0.3s;
+        }
+        #chatbox.minimized {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            opacity: 0.9;
+        }
+        #chatbox.minimized #chatlogs,
+        #chatbox.minimized #chatinput {
+            display: none;
+        }
+        #chatbox.minimized #minimize-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background: #3D52A0;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            background-image: url('{{ url_for('static', filename='chat.png') }}');
+            background-size: 30px 30px; /* Smaller image size */
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        #chatlogs {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ADBBDA;
+            max-height: 80%;
+        }
+        #chatinput {
+            padding: 10px;
+            border-top: 1px solid #ADBBDA;
+            background: #f9f9f9;
+        }
+        #chatinput input {
+            width: calc(100% - 70px);
+            padding: 10px;
+            border: 1px solid #ADBBDA;
+            border-radius: 5px;
+        }
+        #chatinput button {
+            width: 60px;
+            border: none;
+            background-color: #3D52A0;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #chatinput button:hover {
+            background-color: #7091E6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Stock Portfolio</h1>
+    </header>
+    <div class="container">
+        <!-- Existing content -->
+        <form method="POST">
+            <input type="text" name="symbol" placeholder="Stock Symbol" required>
+            <button type="submit">Add Stock</button>
+        </form>
+        <form method="POST" action="{{ url_for('search') }}">
+            <input type="text" name="symbol" placeholder="Search Stock Symbol" required>
+            <button type="submit">Search</button>
+        </form>
+        <ul>
+            {% for stock in stocks %}
+            <li>
+                {{ stock.symbol }}
+                <form method="POST" action="{{ url_for('remove_stock', stock_id=stock.id) }}" style="display:inline;">
+                    <button type="submit" class="remove">Remove</button>
+                </form>
+                <a href="{{ url_for('stock_details', symbol=stock.symbol) }}">View Details</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Chat Interface -->
+    <div id="chatbox" class="minimized"> <!-- Added class "minimized" here -->
+        <button id="minimize-btn"></button>
+        <div id="chatlogs"></div>
+        <div id="chatinput">
+            <input type="text" id="userMessage" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const message = document.getElementById('userMessage').value;
+            const chatlogs = document.getElementById('chatlogs');
+            const userMessageElement = document.createElement('div');
+            userMessageElement.textContent = 'You: ' + message;
+            chatlogs.appendChild(userMessageElement);
+
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({'message': message})
+            })
+            .then(response => response.json())
+            .then(data => {
+                const botMessageElement = document.createElement('div');
+                botMessageElement.textContent = 'Bot: ' + data.response;
+                chatlogs.appendChild(botMessageElement);
+                document.getElementById('userMessage').value = '';
+                chatlogs.scrollTop = chatlogs.scrollHeight;
+            });
+        }
+
+        document.getElementById('minimize-btn').addEventListener('click', function() {
+            const chatbox = document.getElementById('chatbox');
+            if (chatbox.classList.contains('minimized')) {
+                chatbox.classList.remove('minimized');
+                this.style.backgroundImage = 'none';
+            } else {
+                chatbox.classList.add('minimized');
+                this.style.backgroundImage = 'url("{{ url_for('static', filename='chat.png') }}")';
+            }
+        });
+    </script>
+</body>
+</html>
